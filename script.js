@@ -145,19 +145,78 @@ document.getElementById('segnalazioneForm').addEventListener('submit', function(
     const fotoDocumento = document.getElementById('fotoDocumento').files[0];
     const segnalazione = document.getElementById('segnalazione').value;
 
-    // Crea un URL temporaneo per visualizzare l'immagine
-    const fotoURL = URL.createObjectURL(fotoDocumento);
+    // Controlla se è stata selezionata un'immagine
+    if (fotoDocumento) {
+        const reader = new FileReader(); // Crea un FileReader per leggere il file
 
-    // Aggiungi la nuova segnalazione
-    const nuovaSegnalazione = {
-        nome,
-        cognome,
-        dataNascita,
-        foto: fotoURL,
-        segnalazione
-    };
+        // Quando il file è caricato, crea la segnalazione
+        reader.onloadend = () => {
+            const base64String = reader.result; // Ottieni la stringa Base64 dell'immagine
 
-    aggiungiSegnalazione(nuovaSegnalazione);
+            // Crea un oggetto per la nuova segnalazione
+            const nuovaSegnalazione = {
+                nome,
+                cognome,
+                dataNascita,
+                foto: base64String, // Salva l'immagine come stringa Base64
+                segnalazione
+            };
+
+            // Invia la segnalazione al server
+            fetch('http://localhost:3000/segnalazioni', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuovaSegnalazione)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Errore nell\'aggiunta della segnalazione');
+                }
+                return response.json(); // Converti la risposta in JSON
+            })
+            .then(segnalazione => {
+                mostraSegnalazione(segnalazione); // Mostra la segnalazione nella tabella
+            })
+            .catch(error => {
+                console.error("Errore aggiungendo segnalazione: ", error);
+            });
+        };
+
+        // Leggi il file come URL di dati (Base64)
+        reader.readAsDataURL(fotoDocumento);
+    } else {
+        // Se non è stata selezionata alcuna immagine, crea la segnalazione senza foto
+        const nuovaSegnalazione = {
+            nome,
+            cognome,
+            dataNascita,
+            foto: null, // Nessuna foto
+            segnalazione
+        };
+
+        // Invia la segnalazione al server
+        fetch('http://localhost:3000/segnalazioni', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuovaSegnalazione)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore nell\'aggiunta della segnalazione');
+            }
+            return response.json(); // Converti la risposta in JSON
+        })
+        .then(segnalazione => {
+            mostraSegnalazione(segnalazione); // Mostra la segnalazione nella tabella
+        })
+        .catch(error => {
+            console.error("Errore aggiungendo segnalazione: ", error);
+        });
+    }
 
     // Resetta il modulo
     this.reset();
