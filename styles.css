@@ -1,35 +1,99 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset di base */
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 0;
 }
 
+/* Stile del body */
+body {
+    font-family: 'Arial', sans-serif; /* Font di base */
+    background-color: #333; /* Colore di sfondo scuro */
+    color: #fff; /* Colore del testo bianco */
+    line-height: 1.6;
+}
+
+/* Stile dell'intestazione */
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-image: url('logo.parco.jpg'); /* Sostituisci con il percorso corretto dell'immagine */
+    background-color: white;
+    background-size: cover; /* Adatta l'immagine all'intestazione */
+    background-position: center; /* Centra l'immagine */
+    padding: 20px;
     text-align: center;
 }
 
+/* Titolo dell'intestazione */
+header h1 {
+    font-size: 2.5em; /* Dimensione del font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombra del testo */
+}
+
+/* Stile del main */
+main {
+    max-width: 800px; /* Larghezza massima */
+    margin: 20px auto; /* Margine centrale */
+    padding: 20px; /* Padding interno */
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo semi-trasparente */
+    border-radius: 8px; /* Angoli arrotondati */
+}
+
+/* Stile dei form */
 form {
-    margin-bottom: 20px;
+    display: flex; /* Layout flessibile */
+    flex-direction: column; /* Colonna */
+    margin-bottom: 20px; /* Margine in basso */
 }
 
+input, textarea, button {
+    margin: 10px 0; /* Margine verticale */
+    padding: 10px; /* Padding interno */
+    border: none; /* Nessun bordo */
+    border-radius: 4px; /* Angoli arrotondati */
+}
+
+input, textarea {
+    background-color: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente per input e textarea */
+    color: #fff; /* Testo bianco */
+}
+
+/* Stile dei pulsanti */
+button {
+    background-color: #4CAF50; /* Verde per il pulsante */
+    color: white; /* Testo bianco */
+    cursor: pointer; /* Cursore puntatore */
+    transition: background-color 0.3s; /* Transizione dolce */
+}
+
+button:hover {
+    background-color: #45a049; /* Colore più scuro al passaggio del mouse */
+}
+
+/* Stile della tabella */
 table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    width: 100%; /* Larghezza della tabella */
+    border-collapse: collapse; /* Collassa i bordi */
+    margin-top: 20px; /* Margine superiore */
 }
 
 th, td {
-    padding: 8px;
-    text-align: left;
+    padding: 12px; /* Padding delle celle */
+    text-align: left; /* Allineamento a sinistra */
+    border-bottom: 1px solid #444; /* Bordo inferiore */
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #444; /* Sfondo per l'intestazione della tabella */
+    color: #fff; /* Testo bianco */
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Colore di sfondo al passaggio del mouse */
+}
+
+/* Stile per l'immagine */
+img {
+    max-width: 100%; /* Larghezza massima */
+    height: auto; /* Altezza automatica */
+    cursor: pointer; /* Cursore puntatore */
 }

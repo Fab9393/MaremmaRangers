@@ -1,5 +1,4 @@
 // Funzione per mostrare una segnalazione nella tabella
-// Funzione per mostrare una segnalazione nella tabella
 function mostraSegnalazione(segnalazione) {
     const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
     const row = document.createElement('tr');
@@ -43,46 +42,36 @@ function mostraSegnalazione(segnalazione) {
     tabellaBody.appendChild(row);
 }
 
-// Funzione per mostrare l'immagine ingrandita
-function mostraImmagineIng(randita(url) {
-    const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    overlay.style.display = 'flex';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-    overlay.style.zIndex = '1000';
-
-    const img = document.createElement('img');
-    img.src = url;
-    img.style.maxWidth = '90%'; // Limita la larghezza dell'immagine
-    img.style.maxHeight = '90%'; // Limita l'altezza dell'immagine
-    img.style.border = '2px solid white'; // Opzionale: aggiungi un bordo
-    img.style.borderRadius = '8px'; // Opzionale: arrotonda gli angoli
-
-    overlay.appendChild(img);
-    document.body.appendChild(overlay);
-
-    // Chiudi l'immagine ingrandita quando si clicca su di essa
-    overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-    });
-}
-
-
 // Funzione per caricare le segnalazioni dal backend
 async function caricaSegnalazioni() {
     try {
-        const response = await fetch('http://localhost:3000/segnalazioni'); // Cambia l'URL in base alla tua configurazione
+        const response = await fetch('http://localhost:3000/segnalazioni');
         const segnalazioni = await response.json();
+        // Salva le segnalazioni in una variabile globale per poterle filtrare
+        window.segnalazioniGlobali = segnalazioni;
+        // Mostra tutte le segnalazioni
         segnalazioni.forEach(mostraSegnalazione);
     } catch (error) {
         console.error("Errore nel caricamento delle segnalazioni:", error);
     }
+}
+
+// Funzione per filtrare le segnalazioni
+function filtraSegnalazioni() {
+    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+    const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
+    
+    // Pulisci la tabella
+    tabellaBody.innerHTML = '';
+
+    // Filtra le segnalazioni
+    const segnalazioniFiltrate = window.segnalazioniGlobali.filter(segnalazione => {
+        return segnalazione.nome.toLowerCase().includes(searchTerm) ||
+               segnalazione.cognome.toLowerCase().includes(searchTerm);
+    });
+
+    // Mostra le segnalazioni filtrate
+    segnalazioniFiltrate.forEach(mostraSegnalazione);
 }
 
 // Funzione per aggiungere una segnalazione
@@ -102,8 +91,21 @@ async function aggiungiSegnalazione(data) {
     }
 }
 
+// Funzione per resettare la tabella
+function resettaFiltri() {
+    // Pulisci la barra di ricerca
+    document.getElementById('searchBar').value = '';
+    // Ricarica tutte le segnalazioni
+    caricaSegnalazioni();
+}
+
+document.getElementById('resetButton').addEventListener('click', resettaFiltri);
+
 // Carica le segnalazioni quando la pagina è pronta
-document.addEventListener('DOMContentLoaded', caricaSegnalazioni);
+document.addEventListener('DOMContentLoaded', () => {
+    caricaSegnalazioni();
+    document.getElementById('searchBar').addEventListener('input', filtraSegnalazioni);
+});
 
 // Aggiungi il codice per inviare una nuova segnalazione
 document.getElementById('segnalazioneForm').addEventListener('submit', function(event) {
