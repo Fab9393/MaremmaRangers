@@ -125,3 +125,8 @@ img {
     font-size: 30px;
     cursor: pointer; /* Cursore puntatore */
 }
+
+.logo {
+    max-width: 100%; /* Larghezza massima */
+    max-height: 200px; /* Altezza massima */
+}
