@@ -1,3 +1,27 @@
+// Funzione per mostrare l'immagine ingrandita
+function mostraImmagineIng(event) {
+    const urlImmagine = event.target.src; // Ottieni l'URL dell'immagine cliccata
+    const imgIng = document.createElement('img'); // Crea un nuovo elemento immagine
+    imgIng.src = urlImmagine; // Imposta l'URL dell'immagine
+    imgIng.id = 'imgIng'; // Aggiungi un ID per riferirsi all'immagine ingrandita
+    imgIng.style.position = 'fixed'; // Fissa la posizione
+    imgIng.style.top = '50%'; // Centra verticalmente
+    imgIng.style.left = '50%'; // Centra orizzontalmente
+    imgIng.style.transform = 'translate(-50%, -50%)'; // Centra l'immagine
+    imgIng.style.maxWidth = '90%'; // Limita la larghezza al 90%
+    imgIng.style.maxHeight = '90%'; // Limita l'altezza al 90%
+    imgIng.style.zIndex = '1000'; // Porta l'immagine ingrandita in primo piano
+
+    // Aggiungi un evento di click per chiudere l'immagine ingrandita
+    imgIng.addEventListener('click', function() {
+        document.body.removeChild(imgIng); // Rimuovi l'immagine ingrandita dal DOM
+    });
+
+    document.body.appendChild(imgIng); // Aggiungi l'immagine ingrandita al body
+}
+
+
+
 // Funzione per mostrare una segnalazione nella tabella
 function mostraSegnalazione(segnalazione) {
     const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
@@ -74,15 +98,6 @@ function filtraSegnalazioni() {
     segnalazioniFiltrate.forEach(mostraSegnalazione);
 }
 
-// Funzione per ingrandire l'immagine
-function mostraImmagineIng(event) {
-    const img = event.target; // L'immagine cliccata
-    const imgIng = document.createElement('div'); // Creiamo un div per l'ingrandimento
-    imgIng.classList.add('img-ingrandita'); // Aggiungiamo una classe per lo stile
-    imgIng.innerHTML = `<span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
-                        <img src="${img.src}" alt="Immagine Ingrandita">`; // Immagine ingrandita
-    document.body.appendChild(imgIng); // Aggiungiamo il div al body
-}
 
 // Funzione per aggiungere una segnalazione
 async function aggiungiSegnalazione(data) {
