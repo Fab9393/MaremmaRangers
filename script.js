@@ -1,4 +1,5 @@
 // Funzione per mostrare una segnalazione nella tabella
+// Funzione per mostrare una segnalazione nella tabella
 function mostraSegnalazione(segnalazione) {
     const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
     const row = document.createElement('tr');
@@ -19,6 +20,13 @@ function mostraSegnalazione(segnalazione) {
         img.src = segnalazione.foto;
         img.alt = 'Foto documento';
         img.style.width = '50px'; // Dimensione immagine
+        img.style.cursor = 'pointer'; // Cambia il cursore per indicare che è cliccabile
+
+        // Aggiungi evento di clic per ingrandire l'immagine
+        img.addEventListener('click', function() {
+            mostraImmagineIng(randita(img.src));
+        });
+
         cellFoto.appendChild(img);
     } else {
         cellFoto.textContent = 'Nessuna foto disponibile';
@@ -34,6 +42,37 @@ function mostraSegnalazione(segnalazione) {
     
     tabellaBody.appendChild(row);
 }
+
+// Funzione per mostrare l'immagine ingrandita
+function mostraImmagineIng(randita(url) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '1000';
+
+    const img = document.createElement('img');
+    img.src = url;
+    img.style.maxWidth = '90%'; // Limita la larghezza dell'immagine
+    img.style.maxHeight = '90%'; // Limita l'altezza dell'immagine
+    img.style.border = '2px solid white'; // Opzionale: aggiungi un bordo
+    img.style.borderRadius = '8px'; // Opzionale: arrotonda gli angoli
+
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    // Chiudi l'immagine ingrandita quando si clicca su di essa
+    overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+    });
+}
+
 
 // Funzione per caricare le segnalazioni dal backend
 async function caricaSegnalazioni() {
