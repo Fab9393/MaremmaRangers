@@ -161,7 +161,7 @@ input::placeholder, textarea::placeholder {
     margin: 15% auto; /* Margine superiore e centrale */
     padding: 20px; /* Padding interno */
     border: 1px solid #888; /* Bordo */
-    width: 80%; /* Larghezza della modale */
+    width: 100%; /* Larghezza della modale */
     max-width: 600px; /* Larghezza massima */
     border-radius: 8px; /* Angoli arrotondati */
 }
