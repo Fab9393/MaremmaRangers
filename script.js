@@ -9,6 +9,43 @@ async function caricaSegnalazioni() {
     }
 }
 
+// Funzione per mostrare una segnalazione nella tabella
+function mostraSegnalazione(segnalazione) {
+    const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
+    const row = document.createElement('tr');
+
+    const cellNome = document.createElement('td');
+    const cellCognome = document.createElement('td');
+    const cellDataNascita = document.createElement('td');
+    const cellFoto = document.createElement('td');
+    const cellSegnalazione = document.createElement('td');
+
+    cellNome.textContent = segnalazione.nome;
+    cellCognome.textContent = segnalazione.cognome;
+    cellDataNascita.textContent = segnalazione.dataNascita;
+
+    // Crea un elemento immagine se la foto esiste
+    if (segnalazione.foto) {
+        const img = document.createElement('img');
+        img.src = segnalazione.foto;
+        img.alt = 'Foto documento';
+        img.style.width = '50px'; // Dimensione immagine
+        cellFoto.appendChild(img);
+    } else {
+        cellFoto.textContent = 'Nessuna foto disponibile';
+    }
+
+    cellSegnalazione.textContent = segnalazione.segnalazione;
+
+    row.appendChild(cellNome);
+    row.appendChild(cellCognome);
+    row.appendChild(cellDataNascita);
+    row.appendChild(cellFoto);
+    row.appendChild(cellSegnalazione);
+    
+    tabellaBody.appendChild(row);
+}
+
 // Funzione per aggiungere una segnalazione
 async function aggiungiSegnalazione(data) {
     try {
@@ -29,7 +66,7 @@ async function aggiungiSegnalazione(data) {
 // Carica le segnalazioni quando la pagina è pronta
 document.addEventListener('DOMContentLoaded', caricaSegnalazioni);
 
-// Aggiungi il codice per inviare una nuova segnalazione, se necessario
+// Aggiungi il codice per inviare una nuova segnalazione
 document.getElementById('segnalazioneForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Ferma l'invio del modulo
 
