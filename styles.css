@@ -50,6 +50,7 @@ input, textarea, button {
     padding: 10px; /* Padding interno */
     border: none; /* Nessun bordo */
     border-radius: 4px; /* Angoli arrotondati */
+    color: #fff; /* Testo bianco */
 }
 
 input, textarea {
@@ -124,4 +125,9 @@ img {
     color: white;
     font-size: 30px;
     cursor: pointer; /* Cursore puntatore */
+}
+
+#logo {
+    max-width: 100%; /* Larghezza massima al 100% del suo contenitore */
+    height: auto; /* Mantieni l'aspetto dell'immagine */
 }
