@@ -74,16 +74,21 @@ button:hover {
 
 /* Stile della tabella */
 table {
-    width: 100%; /* Larghezza della tabella */
+    width: 100%; /* La tabella occupa tutta la larghezza disponibile */
     border-collapse: collapse; /* Collassa i bordi */
     margin-top: 20px; /* Margine superiore */
+    table-layout: auto; /* Permette di adattare la larghezza delle colonne */
+    overflow: hidden; /* Nasconde eventuale overflow */
 }
 
 th, td {
     padding: 12px; /* Padding delle celle */
     text-align: left; /* Allineamento a sinistra */
     border-bottom: 1px solid #444; /* Bordo inferiore */
+    word-wrap: break-word; /* Permette al testo di andare a capo */
+    white-space: normal; /* Permette di andare a capo */
 }
+
 
 th {
     background-color: #444; /* Sfondo per l'intestazione della tabella */
