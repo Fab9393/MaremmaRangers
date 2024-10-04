@@ -15,7 +15,6 @@ body {
 
 /* Stile dell'intestazione */
 header {
-    background-image: url('logo.parco.jpg'); /* Sostituisci con il percorso corretto dell'immagine */
     background-color: white;
     background-size: cover; /* Adatta l'immagine all'intestazione */
     background-position: center; /* Centra l'immagine */
