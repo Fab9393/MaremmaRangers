@@ -126,8 +126,6 @@ function resettaFiltri() {
     caricaSegnalazioni();
 }
 
-document.getElementById('resetButton').addEventListener('click', resettaFiltri);
-
 // Carica le segnalazioni quando la pagina è pronta
 document.addEventListener('DOMContentLoaded', () => {
     caricaSegnalazioni();
