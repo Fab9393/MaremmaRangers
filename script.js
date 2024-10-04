@@ -1,14 +1,3 @@
-// Funzione per caricare le segnalazioni dal backend
-async function caricaSegnalazioni() {
-    try {
-        const response = await fetch('http://localhost:3000/segnalazioni'); // Cambia l'URL in base alla tua configurazione
-        const segnalazioni = await response.json();
-        segnalazioni.forEach(mostraSegnalazione);
-    } catch (error) {
-        console.error("Errore nel caricamento delle segnalazioni:", error);
-    }
-}
-
 // Funzione per mostrare una segnalazione nella tabella
 function mostraSegnalazione(segnalazione) {
     const tabellaBody = document.querySelector('#tabella-segnalazioni tbody');
@@ -44,6 +33,17 @@ function mostraSegnalazione(segnalazione) {
     row.appendChild(cellSegnalazione);
     
     tabellaBody.appendChild(row);
+}
+
+// Funzione per caricare le segnalazioni dal backend
+async function caricaSegnalazioni() {
+    try {
+        const response = await fetch('http://localhost:3000/segnalazioni'); // Cambia l'URL in base alla tua configurazione
+        const segnalazioni = await response.json();
+        segnalazioni.forEach(mostraSegnalazione);
+    } catch (error) {
+        console.error("Errore nel caricamento delle segnalazioni:", error);
+    }
 }
 
 // Funzione per aggiungere una segnalazione
