@@ -74,6 +74,16 @@ function filtraSegnalazioni() {
     segnalazioniFiltrate.forEach(mostraSegnalazione);
 }
 
+// Funzione per ingrandire l'immagine
+function mostraImmagineIng(event) {
+    const img = event.target; // L'immagine cliccata
+    const imgIng = document.createElement('div'); // Creiamo un div per l'ingrandimento
+    imgIng.classList.add('img-ingrandita'); // Aggiungiamo una classe per lo stile
+    imgIng.innerHTML = `<span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+                        <img src="${img.src}" alt="Immagine Ingrandita">`; // Immagine ingrandita
+    document.body.appendChild(imgIng); // Aggiungiamo il div al body
+}
+
 // Funzione per aggiungere una segnalazione
 async function aggiungiSegnalazione(data) {
     try {
@@ -95,6 +105,7 @@ async function aggiungiSegnalazione(data) {
 function resettaFiltri() {
     // Pulisci la barra di ricerca
     document.getElementById('searchBar').value = '';
+    lista.innerHTML = ''; // Rimuove tutte le segnalazioni esistenti
     // Ricarica tutte le segnalazioni
     caricaSegnalazioni();
 }
