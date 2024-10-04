@@ -46,8 +46,8 @@ function mostraSegnalazione(segnalazione) {
         img.style.cursor = 'pointer'; // Cambia il cursore per indicare che è cliccabile
 
         // Aggiungi evento di clic per ingrandire l'immagine
-        img.addEventListener('click', function() {
-            mostraImmagineIng(randita(img.src));
+        img.addEventListener('click', function(event) {
+            mostraImmagineIng(event); // Passa l'evento corrente
         });
 
         cellFoto.appendChild(img);
@@ -65,6 +65,7 @@ function mostraSegnalazione(segnalazione) {
     
     tabellaBody.appendChild(row);
 }
+
 
 // Funzione per caricare le segnalazioni dal backend
 async function caricaSegnalazioni() {
